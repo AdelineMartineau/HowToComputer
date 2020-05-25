@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://bootswatch.com/4/minty/bootstrap.min.css" rel="stylesheet">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{{ path('home') }}">How To Computer</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('blog') }}">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('blog_create') }}">Créer un article</a>
+                    </li>
+                
+                    {% if not app.user %}
+
+                        <li class="nav-item">
+                            <a href="{{ path('security_login') }}" class="nav-link">
+                            Connexion
+                            </a> 
+                        </li>
+
+                    {% else %}
+                    
+                        <li class="nav-item">
+                            <a href="{{ path('security_logout') }}" class="nav-link">
+                            Déconnexion
+                            </a> 
+                        </li>
+                    {% endif %}
+
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    </form>
+                </ul>
+            </div>
+        </nav>
+
+            <div class="container"
+                {% block body %}{% endblock %}  
+
+                {% block javascripts %}{% endblock %}
+    </body>
+</html>
